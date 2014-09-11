@@ -30,7 +30,7 @@
 
 #define 	MAX_LENGTH 	3000 
 
-int 	resault[MAX_LENGTH] ;
+int 	resault[MAX_LENGTH] ; 		//save result
 
 int main(int argc, char *argv[])
 {
