@@ -126,6 +126,7 @@ int 	delete_key_node (Node_p *head , ValueType key ) {
 }
 
 /// 由于要逆向打印链表 , 如果不改变链表的结构 , 那么就可以用STL的栈来实现
+/// 这里通过递归 , 使用系统栈
 void 	show_chain_reverse (const Node_p head ) {
 	if (NULL == head ) {
 		return ;
@@ -133,6 +134,29 @@ void 	show_chain_reverse (const Node_p head ) {
 	/// 递归的方式逆向打印
 	show_chain_reverse ( head->next) ;
 	printf ("value is %d ",head ->value ) ;
+}
+///  逆置可以用头插法搞
+void 	reverse_chain (Node_p *head ) {
+	Node_p 	front , next , temp , temp_next ;	
+
+	if ( NULL == head || NULL == *head ) {
+		printf ("Pass in NULL pointer\n") ;
+		return ;
+	}
+	// 用front 先代替我的头节点	
+	front = *head ;
+	// 头插的过程
+	next = front ->next ;
+	front ->next = NULL ;
+	while ( next ) {
+		temp_next = next ->next ;
+		temp = front ;
+		front = next ;
+		next ->next = temp ;
+		next = temp_next ;
+	}
+	// 将头节点修改掉
+	*head = front ;
 }
 
 int main(int argc, char *argv[])
@@ -149,6 +173,7 @@ int main(int argc, char *argv[])
 	} else {
 		printf ("key not found \n") ;
 	}
+	reverse_chain (&head);
 	show_chain (head) ;
 	show_chain_reverse (head) ;
 	putchar ('\n');
